@@ -47,5 +47,6 @@ variable "aks_cli_optional_overrides" {
   type = list(object({
     name  = string
     value = string
-  }), [])
+  }))
+  default = []
 }
