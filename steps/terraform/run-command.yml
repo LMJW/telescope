@@ -20,7 +20,7 @@ parameters:
 steps:
 - script: |
     set -e
-
+    export TF_VAR_aks_cli_optional_parameters_overrides=$(TF_VAR_aks_cli_optional_parameters_overrides)
     cd $TERRAFORM_WORKING_DIRECTORY
     if [[ ${{ parameters.command }} == "apply" || ${{ parameters.command }} == "destroy" ]]; then
       for region in $(echo "$REGIONS" | jq -r '.[]'); do
