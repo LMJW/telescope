@@ -42,3 +42,10 @@ variable "aks_cli_config" {
     })), [])
   })
 }
+
+variable "aks_cli_optional_overrides" {
+  type = list(object({
+    name  = string
+    value = string
+  }), [])
+}

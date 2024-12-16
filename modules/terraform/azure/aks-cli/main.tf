@@ -19,12 +19,24 @@ locals {
     )
   )
 
+  optional_params = {
+    for param in var.aks_cli_config.optional_parameters :
+    param.name => param.value
+  }
+
+  overrides = {
+    for param in var.aks_cli_optional_overrides :
+    param.name => param.value
+  }
+
+  optional_parameters_with_overrides = merge(local.optional_params, local.overrides)
+
   optional_parameters = (
-    length(var.aks_cli_config.optional_parameters) == 0 ?
+    length(optional_parameters_with_overrides) == 0 ?
     "" :
     join(" ", [
-      for param in var.aks_cli_config.optional_parameters :
-      format("--%s %s", param.name, param.value)
+      for key, value in optional_parameters_with_overrides :
+      format("--%s %s", key, value)
     ])
   )
 }
