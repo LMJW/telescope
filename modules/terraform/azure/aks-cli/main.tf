@@ -32,10 +32,10 @@ locals {
   optional_parameters_with_overrides = merge(local.optional_params, local.overrides)
 
   optional_parameters = (
-    length(optional_parameters_with_overrides) == 0 ?
+    length(local.optional_parameters_with_overrides) == 0 ?
     "" :
     join(" ", [
-      for key, value in optional_parameters_with_overrides :
+      for key, value in local.optional_parameters_with_overrides :
       format("--%s %s", key, value)
     ])
   )
