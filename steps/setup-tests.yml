@@ -25,6 +25,8 @@ steps:
       run_id=$(Build.BuildId)-$(System.JobId)
     fi
     echo "Run ID: $run_id"
+    my_var=$(TF_VAR_aks_cli_optional_parameters_overrides)
+    echo "Test my_var: $my_var"
     echo "##vso[task.setvariable variable=RUN_ID]$run_id"
   displayName: "Set Run ID"
   env:
